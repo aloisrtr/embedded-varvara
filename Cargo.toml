@@ -1,0 +1,22 @@
+[package]
+name = "embedded-varvara"
+version = "0.1.0"
+edition = "2021"
+description = "A Varvara emulator built on top of embedded-hal abstractions."
+authors = ["Aloïs Rautureau <alois.rautureau@ens-rennes.fr>"]
+
+[dependencies]
+baryuxn = "0.1"
+embedded-hal = { version = "1.0" }
+
+defmt = { version = "0.3.8", optional = true }
+embedded-graphics-core = { version = "0.4", optional = true }
+embedded-io = { version = "0.6", optional = true }
+chrono = { version = "0.4", default-features = false, features = ["now"], optional = true }
+
+[features]
+default = ["graphics", "chrono", "io", "defmt"]
+graphics = ["dep:embedded-graphics-core"]
+io = ["dep:embedded-io"]
+chrono = ["dep:chrono"]
+defmt = ["dep:defmt", "embedded-hal/defmt-03", "embedded-graphics-core?/defmt"]
